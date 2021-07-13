@@ -111,8 +111,8 @@ let MeetSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  status: Number,
-  reminder: Number,
+  status: Number, //Check for the meet is cancelled or not
+  reminder: Number, //When the server reminds the users of this meet at the 'starttime' it changes this to 1
   chats: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Chat'
@@ -1023,7 +1023,7 @@ io.on('connection', socket => {
     socket.on('muteOthers', function(userId, userName) {
       io.to(meetId).emit('muteOthers', userId, userName);
     })
-    
+
     socket.on('screenshare', function(userId, userName) {
       io.to(meetId).emit('screenshare', userId, userName);
     })
