@@ -66,10 +66,11 @@
  ![alt text](https://github.com/sreebasu05/engage-keep-in-touch/blob/master/static/images/model-2.png)<br><br>
  
  ## <a name="futureplans"></a>Future Plans:
- * Allowing image sharing
- * Allowing putting up display picture
+ * Allow image & file sharing
+ * Allow putting up display picture
  * Giving owner rights in groups
  * Adding screen animations for celebrating, praising etc.
+ * Add Chat Banners to alert about new chats
 
   ## <a name="limitaions"></a>Limitations:
 * This website is tested only in Google Chrome and is compatible with it
