@@ -1,0 +1,45 @@
+<% if(groups.length==0){%>
+<div id="start" class="container-fluid">
+  <div data-aos="fade-down-left" data-aos-duration="1000" class="home-div row container-fluid">
+    <div class="col-lg-5" style="padding-left:190px;">
+      <img src="/images/create-2.jpeg" alt="">
+    </div>
+    <div class="col-lg-5">
+      <h1 class="heading-left">Let's Get Started</h1>
+      <div style="display:flex;justify-content: flex-end;">
+        <form class="" action="/group" method="get">
+          <button type="submit" class="btn btn-lg" name="button">Create Group</button>
+        </form>
+        <form class="" action="/joingroup" method="get">
+          <button type="submit" class="btn btn-lg btn-inv" name="button">Join Group</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+<% } %>
+
+<% if(groups.length!=0){%>
+<div id="group" class="container-fluid">
+  <div class="side-bar">
+    <div class="dashcontrols" style="flex-direction:row;">
+      <form class="" action="/joingroup" method="get">
+        <button type="submit" class="create-button btn"><i class="fas fa-user-plus"></i></button>
+      </form>
+      <form class="" action="/group" method="get">
+        <button type="submit" class="create-button btn"><i class="fas fa-plus"></i></button>
+      </form>
+    </div>
+
+      <% groups.forEach(function(group) { %>
+        <%if(thisgroup.groupname === group.groupname){ %>
+        <a class="gdetails act dash-link" href="/dashboard/<%=group._id%>"><%= group.groupname %></a>
+        <%}else{ %>
+          <a class="gdetails dash-link" href="/dashboard/<%=group._id%>"><%= group.groupname %></a>
+
+        <%}%>
+      <% })%>
+
+  </div>
+  <%}%>

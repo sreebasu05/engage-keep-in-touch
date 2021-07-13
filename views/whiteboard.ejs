@@ -1,0 +1,38 @@
+<%- include("header") -%>
+
+
+
+<div id="link" class="container-fluid">
+  <div class="card">
+    <div class="meet-card card-body">
+      Meet Id: <small class="text-muted"><%= meetId %></small>
+    </div>
+  </div>
+</div>
+
+<div id="media" class="container-fluid">
+  <canvas class="whiteboard" ></canvas>
+
+  <div class="colors">
+
+    <div class="color black"></div>
+    <div class="color red"></div>
+    <div class="color green"></div>
+    <div class="color blue"></div>
+    <div class="color yellow"></div>
+    <div class="color white fas fa-trash-alt fa-2x"></div>
+
+  </div>
+
+</div>
+
+<!-- Start of Script Tags -->
+  <script>
+    const MeetId = '<%= meetId %>'
+  </script>
+
+  <script src="https://engage-keep-in-touch.herokuapp.com/socket.io/socket.io.js"></script>
+  <script src="/js/whiteboard.js"></script>
+<!-- End of Script Tags -->
+</body>
+</html>

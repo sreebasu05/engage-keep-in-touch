@@ -1,0 +1,102 @@
+<%- include("header") -%>
+
+
+
+<div id="start" class="container-fluid">
+  <!-- Start of Host or Join Div -->
+  <div data-aos="fade-down-right" data-aos-duration="1000" class="home-div row container-fluid">
+    <div class="col-lg-6">
+      <h1 class="heading">Keep in touch with people <br />with just one click</h1>
+      <p class="text-muted">Good communication is the bridge between confusion and clarity</p>
+      <div style="display: flex;">
+        <form class="" action="/hostmeet" method="get">
+          <button type="submit" class="btn btn-lg" name="button">Host Meet</button>
+        </form>
+        <form class="" action="/joinmeet" method="get">
+          <button type="submit" class="btn-inv btn btn-lg " name="button">Join Meet</button>
+        </form>
+      </div>
+
+    </div>
+    <div class="col-lg-6">
+      <img src="/images/home-1.jpeg" alt="">
+    </div>
+    <br>
+    <hr>
+  </div>
+  <!-- End of Host or Join Div -->
+
+  <br><br>
+  <!-- Start of Login and Signup Div -->
+  <div data-aos="fade-down-left" data-aos-duration="1000" class="home-div row container-fluid">
+    <div class="col-lg-8">
+      <img src="/images/home-3.png" alt="">
+    </div>
+    <div class="col-lg-4">
+      <h1 class="heading-left">Have regular meetings with the same people?</h1>
+      <!-- <h1 id="place" class="heading"></h1> -->
+      <p class="text-muted" style="text-align:right;">Create Groups by signing up or logging in.</p>
+      <div style="display:flex;justify-content: flex-end;">
+        <form class="" action="/signup" method="get">
+          <button type="submit" class="btn btn-lg" name="button">Sign Up</button>
+        </form>
+        <form class="" action="/login" method="get">
+          <button type="submit" class="btn btn-lg btn-inv" name="button">Log In</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <!-- End of Login and Signup Div -->
+</div>
+<!-- <div id="features" class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4">
+      <img src="/images/home-2.jpeg" alt="">
+    </div>
+    <div class="col-lg-4">
+      <img src="/images/home-2.jpeg" alt="">
+    </div>
+    <div class="col-lg-4">
+      <img src="/images/home-2.jpeg" alt="">
+    </div>
+  </div>
+</div> -->
+<hr>
+<div id="credits" class="container-fluid">
+  <div>
+    <img data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid credits-img" width="250" height="250" src="/images/acehacker.jpeg"
+      aria-label="Placeholder: 250x250">
+    <img data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid credits-img" width="250" height="250" src="/images/microsoft.png"
+      aria-label="Placeholder: 250x250">
+    <img data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid credits-img" width="250" height="250" src="/images/mnnit.png"
+      aria-label="Placeholder: 250x250">
+    <hr>
+  </div>
+
+  <br><br>
+  <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000" style="text-align: center;">
+    <h2 ><strong>Mentors</strong></h2>
+    <p class="credits-text">Ms. Pratibha Gaund</p>
+    <p class="credits-text">Mr. Naveen Luhach</p>
+  </div>
+  <br>
+  <br>
+  <div data-aos="fade-up" data-aos-anchor-placement="top-bottom" data-aos-duration="1000" style="text-align: center;">
+    <h2 ><strong>Developed By</strong></h2>
+    <p class="credits-text">Ms. Sreemoyee Basu</p>
+
+  </div>
+</div>
+
+</div>
+<!-- Start of Script Tags -->
+
+<script>
+  AOS.init();
+</script>
+
+<!-- End of Script Tags -->
+</body>
+
+</html>

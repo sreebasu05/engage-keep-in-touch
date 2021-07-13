@@ -1,0 +1,44 @@
+Views
+  header
+
+  home
+
+  hostcafe
+  joincafe
+
+  cafe
+  whiteboard
+  screen --> sharescreen
+  display --> displayscreen
+
+  login
+  signup
+
+  dashboard
+  group --> creategroup
+  joingroup
+  meet --> createmeet
+
+  leave --> logout
+
+  credits
+
+Get routes
+  /
+  /hostcafe
+  /hostcafe/:cafe
+  /joincafe
+  /whiteboard/:cafe
+  /screen/:cafe
+  /show/:cafe
+  /login
+  /signup
+  /cafe/:cafe
+  /dashboard
+  /dashboard/:group
+  /group
+  /joingroup
+  /delete/:group
+  /meet/:group
+  /credits
+  /logout
