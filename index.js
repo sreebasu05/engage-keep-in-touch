@@ -1,14 +1,14 @@
 // Contents
 // Requiring Modules --------------------------------- Line 14-37
-// Cron scheduler ------------------------------------ Line 41-82
-// Connecting to Database & Storing of sessions ------ Line 84-97
-// Middlewares --------------------------------------- Line 99-111
-// Schemas ------------------------------------------- Line 118-204
-// User Auth function -------------------------------- Line 211-222
-// Node Mailer function ------------------------------ Line 227-260
-// Get Routes ---------------------------------------- Line 266-700
-// Post Routes --------------------------------------- Line 705-1025
-// Sockets ------------------------------------------- Line 1031-1113
+// Connecting to Database & Storing of sessions ------ Line 39-52
+// Middlewares --------------------------------------- Line 54-66
+// Schemas ------------------------------------------- Line 73-159
+// User Auth function -------------------------------- Line 166-177
+// Node Mailer function ------------------------------ Line 182-215
+// Get Routes ---------------------------------------- Line 221-654
+// Post Routes --------------------------------------- Line 659-980
+// Sockets ------------------------------------------- Line 986-1068
+// Cron scheduler ------------------------------------ Line 1075-1118
 
 
 const express = require('express');
@@ -35,51 +35,6 @@ const peerServer = ExpressPeerServer(server, {
 const nodemailer = require("nodemailer")
 const cors = require('cors');
 const cron = require('node-cron');
-
-// This cron scheduler checks every minute if any meet is starting and send a
-// reminder mail to the users.
-cron.schedule('*/1 * * * *', function() {
-  let today = new Date()
-  let todayOffset = today.getTimezoneOffset();
-  let ISTOffset = 330;
-  let ISTTime = new Date(today.getTime() + (ISTOffset + todayOffset) * 60000);
-  console.log(ISTTime.getFullYear() + "-" + ISTTime.getMonth() + "-" + ISTTime.getDate())
-  console.log(ISTTime.getHours() + ":" + ISTTime.getMinutes())
-  Meet.find({ //This finds every meet which are yet to begin and are not cancelled
-    reminder: 0,
-    status: 0
-  }, function(err, meets) {
-    if (!err) {
-      meets.forEach(function(meet) {
-        // For each meet we check if it's scheduled now, if yes we update
-        // the reminder to 1 that means the meeting has begun and we remind all
-        // members of that group about the meeting.
-        console.log(meet.starttime);
-        if (today == meet.startdate && time == meet.starttime) {
-          Meet.updateOne({
-            _id: meet._id
-          }, {
-            $set: {
-              reminder: 1
-            }
-          }, function(err, m) {
-            Group.findOne({
-              meets: meet._id
-            }, function(err, group) {
-              User.find({
-                groups: group._id
-              }, function(err, users) {
-                users.forEach(function(user) {
-                  mail('', user, meet)
-                })
-              })
-            })
-          })
-        }
-      })
-    }
-  })
-})
 
 const uri = process.env.MONGODB_URI;
 mongoose.connect(uri || "mongodb://localhost:27017/touchDB", {
@@ -389,11 +344,10 @@ app.get('/meet/:meet/:title', isAuth, function(req, res) {
     }
   })
 })
-app.get('/hangup', function(req,res){
-  if(req.session.user){
+app.get('/hangup', function(req, res) {
+  if (req.session.user) {
     res.redirect('/dashboard')
-  }
-  else{
+  } else {
     res.redirect('/joinmeet')
   }
 })
@@ -428,7 +382,7 @@ app.get('/dashboard/:group', isAuth, async function(req, res) {
   let groups = [];
   let members = await User.find({
     groups: req.params.group
-  },function(err,members){
+  }, function(err, members) {
     if (!members) {
       req.session.error = "Group doesn't exists!"
       return res.redirect('/dashboard');
@@ -780,7 +734,7 @@ app.post('/joingroup', isAuth, async function(req, res) {
   let group = await Group.findOne({
     groupname: name,
     groupkey: key
-  },function(err,group){
+  }, function(err, group) {
     if (!group) {
       req.session.error = "";
       return res.render('joingroup', {
@@ -794,7 +748,7 @@ app.post('/joingroup', isAuth, async function(req, res) {
   let ispart = await User.findOne({
     _id: req.session.user,
     groups: group._id
-  },function(err,ispart){
+  }, function(err, ispart) {
     if (ispart) {
       req.session.error = "You are already in the group!";
       return res.redirect('/dashboard/' + group._id)
@@ -817,7 +771,7 @@ app.post('/joingroup', isAuth, async function(req, res) {
 app.post('/group', isAuth, async function(req, res) {
   let name = req.body.name;
   let key = req.body.key;
-  if(name=="" || key==""){
+  if (name == "" || key == "") {
     req.session.error = ""
     return res.render('creategroup', {
       isAuth: req.session.isAuth,
@@ -827,7 +781,7 @@ app.post('/group', isAuth, async function(req, res) {
   }
   let foundGroup = await Group.findOne({
     groupname: name
-  },function(err,foundGroup){
+  }, function(err, foundGroup) {
     if (foundGroup) {
       req.session.error = ""
       return res.render('creategroup', {
@@ -869,7 +823,7 @@ app.post('/createmeet/:group', isAuth, async function(req, res) {
   }
   let members = await User.find({
     groups: req.params.group
-  },function(err,members){
+  }, function(err, members) {
     if (!members) {
       req.session.error = "Group does not exist!";
       return res.redirect("/dashboard")
@@ -879,7 +833,7 @@ app.post('/createmeet/:group', isAuth, async function(req, res) {
 
   let group = await Group.findOne({
     _id: groupid
-  },function(err,group){
+  }, function(err, group) {
     if (!group) {
       req.session.error = "Group does not exist!";
       return res.redirect("/dashboard")
@@ -912,7 +866,8 @@ app.post('/createmeet/:group', isAuth, async function(req, res) {
     group.save();
 
     members.forEach(function(member) {
-      mail('', user, meet, "invite")
+      console.log(member)
+      mail('', member, meet, "invite")
     })
     req.session.error = "New Meet Created!"
     res.redirect('/dashboard/' + group._id)
@@ -953,14 +908,14 @@ app.post('/signup', async function(req, res) {
   let username = req.body.username;
   let password = req.body.password;
   let repassword = req.body.repassword;
-  if(email=="" || username=="" || password==""){
+  if (email == "" || username == "" || password == "") {
     return res.render('signup', {
       isAuth: req.session.isAuth,
       message: "Please Input Every Data!",
       title: 'Sign Up | '
     })
   }
-  if(password!=repassword){
+  if (password != repassword) {
     return res.render('signup', {
       isAuth: req.session.isAuth,
       message: "Passwords do not match.",
@@ -996,7 +951,7 @@ app.post('/login', async function(req, res) {
   let password = req.body.password;
   let user = await User.findOne({
     email: email
-  },function(err,user){
+  }, function(err, user) {
     if (!user) {
       req.session.error = "";
       return res.render("signup", {
@@ -1111,6 +1066,55 @@ io.on('connection', socket => {
   });
 });
 
+
+// ---------------------------------------------------------------------
+// -----------------------------NODE-CRON-------------------------------
+// ---------------------------------------------------------------------
+// This cron scheduler checks every minute if any meet is starting and send a
+// reminder mail to the users.
+cron.schedule('*/1 * * * *', function() {
+  let today = new Date()
+  let todayOffset = today.getTimezoneOffset();
+  let ISTOffset = 330;
+  let ISTTime = new Date(today.getTime() + (ISTOffset + todayOffset) * 60000);
+  today = ISTTime.getFullYear() + "-" + String(ISTTime.getMonth() + 1).padStart(2, '0') + "-" + String(ISTTime.getDate()).padStart(2, '0');
+  let time = String(ISTTime.getHours()).padStart(2, '0') + ":" + String(ISTTime.getMinutes()).padStart(2, '0');
+  console.log(today + " " + time);
+  let meets = Meet.find({ //This finds every meet which are yet to begin and are not cancelled
+    reminder: 0,
+    status: 0
+  }, function(err, meets) {
+    if (err)
+      return;
+    meets.forEach(function(meet) {
+      // For each meet we check if it's scheduled now, if yes we update
+      // the reminder to 1 that means the meeting has begun and we remind all
+      // members of that group about the meeting.
+      if (today == meet.startdate && time == meet.starttime) {
+        console.log('A');
+        Meet.updateOne({
+          _id: meet._id
+        }, {
+          $set: {
+            reminder: 1
+          }
+        }, function(err, m) {
+          Group.findOne({
+            meets: meet._id
+          }, function(err, group) {
+            User.find({
+              groups: group._id
+            }, function(err, users) {
+              users.forEach(function(user) {
+                mail('', user, meet, "reminder")
+              })
+            })
+          })
+        })
+      }
+    })
+  });
+})
 
 server.listen(process.env.PORT || 3000, function() {
   console.log('Server started at port 3000')
