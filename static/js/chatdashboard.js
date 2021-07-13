@@ -1,3 +1,5 @@
+//Dashboard chat's js
+
 const socket = io('/')
 socket.emit('entermeet', MeetId, '', UserName);
 

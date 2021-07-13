@@ -1,3 +1,6 @@
+//Audience side's js
+
+
 //*********** Start of code required when deploying ***********
 const socket = io('/')
 

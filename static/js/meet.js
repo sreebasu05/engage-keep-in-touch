@@ -31,8 +31,8 @@ peer.on('open', function(userId) { //generates my id
   socket.emit('ourname', myUserId, UserName);
 
 })
-socket.on('ourname', function(userId, userName) {
-  users.add(userId)
+socket.on('ourname', function(userId, userName) { //Gets the name of new joined users
+  users.add(userId)     //users & usernames is declared in meet.ejs
   usernames.set(userId, {
     name: userName
   })
@@ -50,10 +50,10 @@ socket.on('leavemeet', function(userId, userName) {
   if (x) {
     x.remove()
   }
-  checkVideo()
+  checkVideo()  //Resizes the videos
   if (peers[userId]) peers[userId].close()
 })
-//*********** End of code to handle user connections ***********
+
 
 
 //*********** Start of code to add videoboxes  ***********
@@ -279,6 +279,7 @@ socket.on('startdisplay', function(userId, userName) {
 function display(){
   window.open('https://engage-keep-in-touch.herokuapp.com/display/'+ MeetId)
 }
+
 // 7. Collab feature
 function whiteboard() {
   // window.open('http://localhost:3000/whiteboard/' + MeetId)
@@ -315,8 +316,8 @@ document.getElementsByClassName('media-left')[0].addEventListener("click", funct
   x = document.getElementById('participants');
   x.style.flex = 0;
 });
-
 //*********** End of code for handling features ***********
+
 navigator.mediaDevices.getUserMedia({
   video: true,
   audio: true
@@ -420,7 +421,7 @@ navigator.mediaDevices.getUserMedia({
     peers[userId] = call
   }
 
-  //These are to hide video and mute if chosen before entering
+  //These are to hide video and mute if unticked before entering
   if (Video == false) {
     videoStop();
   }
@@ -429,3 +430,4 @@ navigator.mediaDevices.getUserMedia({
   }
 
 })
+//*********** End of code to handle user connections ***********

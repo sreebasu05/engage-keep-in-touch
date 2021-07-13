@@ -1,4 +1,4 @@
-
+// Dashboard's js
 
 function details() {
   let x = document.getElementById('hide-bar');
