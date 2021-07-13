@@ -1,9 +1,9 @@
-<h1 align="center">Keep-In-Touch</h1>
+<h1 align="center"><b>Keep-In-Touch</b></h1>
 <p align="center">
 </p>
 
 ## Introduction:
-  This is a web-development project for videoconferencing.
+  Keep-In-Touch which is a web development project that is designed and developed by Sreemoyee Basu for Microsoft Engage through which two or more people can have a video conversation and much more.
 
 ## Website Link:
   https://engage-keep-in-touch.herokuapp.com/
