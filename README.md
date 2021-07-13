@@ -75,6 +75,7 @@
   ## <a name="limitaions"></a>Limitations:
 * This website is tested only in Google Chrome and is compatible with it
 * Video box resizing is tested and works perfectly with at most 8 people
+* Tested only on laptop and not on mobile phones
 
 ## <a name="troubleshooting"></a>Troubleshooting:
  * If you are not able to see the other user then try checking your connection and try using mobile data
