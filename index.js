@@ -193,11 +193,11 @@ function mail(from, to, meet, type) {
   if (type == "reminder") {
     message += `Dear ` + to.username + `<br>This mail is to remind you about the meet ` + meet.meetname + ` .<br>` + meet.meetdetails + `<br>Timings: ` + meet.startdate + ` ` + meet.starttime + `<br> <a href="https://engage-keep-in-touch.herokuapp.com/meet/` + meet._id + `/` + meet.meetname + `">MeetLink</a><br>Regards <br>` + meet.meethost
   } else if (type == "invite") {
-    message += `Dear ` + to.username + `<br>This mail is to invite you about the meet ` + meet.meetname + ` .<br>` + meet.meetdetails + `<br>Timings: ` + meet.startdate + ` ` + meet.starttime + `<br> Regards <br>` + meet.meethost
+    message += `Dear ` + to.username + `<br>This mail is to invite you about the meet ` + meet.meetname + ` .<br>` + meet.meetdetails + `<br>Timings: ` + meet.startdate + ` ` + meet.starttime + `<br> <a href="https://engage-keep-in-touch.herokuapp.com/meet/` + meet._id + `/` + meet.meetname + `">MeetLink</a><br> Regards <br>` + meet.meethost
   } else if (type == "cancel") {
     message += `Dear ` + to.username + `<br>This is to inform you with regret that the meet ` + meet.meetname + ` is cancelled.<br> Regards <br>` + from.username
   } else if (type == "undocancel") {
-    message += `Dear ` + to.username + `<br>This is to inform you that the event ` + meet.meetname + ` is not cancelled. <br>` + meet.meetdetails + `<br>Timings ` + meet.meetstart + `<br> Regards <br>` + from.username
+    message += `Dear ` + to.username + `<br>This is to inform you that the event ` + meet.meetname + ` is not cancelled. <br>` + meet.meetdetails + `<br>Timings: ` + meet.startdate + ` ` + meet.starttime + `<br> <a href="https://engage-keep-in-touch.herokuapp.com/meet/` + meet._id + `/` + meet.meetname + `">MeetLink</a><br> Regards <br>` + from.username
   }
   let mailDetails = {
     to: to.email,
