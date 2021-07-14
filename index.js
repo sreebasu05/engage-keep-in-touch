@@ -617,7 +617,7 @@ app.get('/undomeet/:group/:meet', isAuth, async function(req, res) { //Undo canc
         groups: req.params.group
       }, function(err, users) {
         users.forEach(function(subuser) {
-          mail(user, subuser, meet, "cancel")
+          mail(user, subuser, meet, "undocancel")
         })
         req.session.error = "";
         res.redirect('/dashboard/' + req.params.group)
