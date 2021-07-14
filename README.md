@@ -30,7 +30,7 @@
 1) <b>Video Conversation</b> : Two and more people can have a video conversation in this website
 2) <b>Turn off / on Camera</b> : User can choose to show or hide themselves from others during a call and only show initials of their name
 3) <b>Mute / Unmute Audio</b> : User can choose to speak or not speak and avoid causing chaos in a call
-4) <b>Mute All Participants</b> : User can mute everyone in the call excluding themselves when talking so to avoid interruptions
+4) <b>Mute All Participants</b> : User can mute everyone in the call excluding themselves while talking so to avoid interruptions
 5) <b>Raise / Lower Hand</b> : User can raise their hand to request the members of the call to allow him/her ask questions or give opinions and lower their hand when the work is done. This is to avoid unwanted interruptions
 6) <b>Participants List</b> : Any person in the call can see the participants list and check who all are their in the call
 7) <b>Name on Hovering</b> : While hovering on a video box one can see the participants name
