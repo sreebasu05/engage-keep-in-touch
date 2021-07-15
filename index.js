@@ -787,25 +787,28 @@ app.post('/group', isAuth, async function(req, res) {
         title: "Create Group | "
       });
     }
+    else{
+      User.findOne({
+        _id: req.session.user
+      }, function(err, foundUser) {
+        if (err) {
+          req.session.error = "User logged out!"
+          res.redirect('/login');
+        } else {
+          const group = new Group({
+            groupname: name,
+            groupkey: key
+          });
+          group.save();
+          foundUser.groups.push(group._id);
+          foundUser.save();
+          res.redirect('/dashboard/' + group._id)
+        }
+      })
+    }
   });
 
-  User.findOne({
-    _id: req.session.user
-  }, function(err, foundUser) {
-    if (err) {
-      req.session.error = "User logged out!"
-      res.redirect('/login');
-    } else {
-      const group = new Group({
-        groupname: name,
-        groupkey: key
-      });
-      group.save();
-      foundUser.groups.push(group._id);
-      foundUser.save();
-      res.redirect('/dashboard/' + group._id)
-    }
-  })
+
 })
 
 app.post('/createmeet/:group', isAuth, async function(req, res) {
