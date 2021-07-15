@@ -819,7 +819,7 @@ app.post('/createmeet/:group', isAuth, async function(req, res) {
   let end = req.body.end;
 
   if (name == "" || details == "") {  //Checks if nothing is blank
-    res.redirect('meet/' + groupid);
+    return res.redirect('/createmeet/' + groupid);
   }
   let members = await User.find({ //Checks if there are any members
     groups: req.params.group
@@ -845,9 +845,9 @@ app.post('/createmeet/:group', isAuth, async function(req, res) {
     groups: groupid
   }).populate('groups').exec(function(err, user) {
     if (!user) {
-      res.redirect('/dashboard' + groupid)
+      return res.redirect('/dashboard' + groupid)
     } else if (err) {
-      res.redirect("/dashboard");
+      return res.redirect("/dashboard");
     }
     const meet = new Meet({
       meetname: name,
