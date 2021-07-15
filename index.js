@@ -277,7 +277,7 @@ app.get('/display/:meet', function(req, res) {
 })
 
 app.get('/login', function(req, res) {
-  if (req.session.isAuth) {   //if user is already logged in redirects to the dashboard
+  if (req.session.isAuth) { //if user is already logged in redirects to the dashboard
     req.session.error = '';
     res.redirect('/dashboard')
   } else {
@@ -289,7 +289,7 @@ app.get('/login', function(req, res) {
   }
 })
 app.get('/signup', function(req, res) {
-  if (req.session.isAuth) {   //if user is already logged in redirects to the dashboard
+  if (req.session.isAuth) { //if user is already logged in redirects to the dashboard
     req.session.error = '';
     res.redirect('/dashboard')
   } else {
@@ -345,7 +345,7 @@ app.get('/meet/:meet/:title', isAuth, function(req, res) {
 app.get('/hangup', function(req, res) {
   if (req.session.user) { //If logged in redirects to dashboard
     res.redirect('/dashboard')
-  } else {                //Else to the join page
+  } else { //Else to the join page
     res.redirect('/joinmeet')
   }
 })
@@ -378,7 +378,7 @@ app.get('/dashboard', isAuth, function(req, res) {
 })
 app.get('/dashboard/:group', isAuth, async function(req, res) { //Group's Dashboard
   let groups = [];
-  let members = await User.find({   //fetches members of this group
+  let members = await User.find({ //fetches members of this group
     groups: req.params.group
   }, function(err, members) {
     if (!members) {
@@ -391,7 +391,7 @@ app.get('/dashboard/:group', isAuth, async function(req, res) { //Group's Dashbo
   User.findOne({ // Fetches all groups this user is a part of
     _id: req.session.user,
     groups: req.params.group
-  }).populate('groups').exec(function(err, user) {  //Fetches groups of this user
+  }).populate('groups').exec(function(err, user) { //Fetches groups of this user
     if (!user) { //If user is accessing this group wrongfully
       req.session.error = 'Your are not part of this group!'
       return res.redirect('/dashboard');
@@ -420,7 +420,7 @@ app.get('/dashboard/:group', isAuth, async function(req, res) { //Group's Dashbo
     }
   });
 })
-app.get('/chat/:group/:meet', isAuth, function(req, res) {  //Chat page of a meet
+app.get('/chat/:group/:meet', isAuth, function(req, res) { //Chat page of a meet
   User.findOne({
     _id: req.session.user,
     groups: req.params.group
@@ -431,11 +431,11 @@ app.get('/chat/:group/:meet', isAuth, function(req, res) {  //Chat page of a mee
     } else {
       groups = user.groups;
       userName = user.username;
-      Meet.findOne({  //Checks if the meet exists
+      Meet.findOne({ //Checks if the meet exists
         _id: req.params.meet
       }).populate('chats').exec(function(err, meet) {
         if (err) {
-          req.session.error="Meet does not exist!"
+          req.session.error = "Meet does not exist!"
           res.redirect('/dashboard');
         } else {
           res.render('chat', {
@@ -476,7 +476,7 @@ app.get('/reminder/:group/:meet', isAuth, async function(req, res) { //reminder 
     groups: req.params.group
   }, function(err, members) {
 
-    members.forEach(function(member) {  //Mails each one of them
+    members.forEach(function(member) { //Mails each one of them
       mail(user, member, meet, "reminder")
     })
 
@@ -485,14 +485,14 @@ app.get('/reminder/:group/:meet', isAuth, async function(req, res) { //reminder 
 
 })
 
-app.get('/group', isAuth, function(req, res) {  //Group creating route
+app.get('/group', isAuth, function(req, res) { //Group creating route
   res.render('creategroup', {
     isAuth: req.session.isAuth,
     message: '',
     title: "Create Group | "
   })
 })
-app.get('/joingroup', isAuth, function(req, res) {  //Group joining route
+app.get('/joingroup', isAuth, function(req, res) { //Group joining route
   res.render('joingroup', {
     isAuth: req.session.isAuth,
     message: '',
@@ -526,7 +526,7 @@ app.get("/leave/:group", isAuth, function(req, res) { //Group leaving route
 });
 
 app.get('/createmeet/:group', isAuth, async function(req, res) { //Meet creating route
-  let user = await User.findOne({   //Checks if the user is part of this group
+  let user = await User.findOne({ //Checks if the user is part of this group
     _id: req.session.user,
     groups: req.params.group
   }, function(err, user) {
@@ -535,8 +535,8 @@ app.get('/createmeet/:group', isAuth, async function(req, res) { //Meet creating
       return res.redirect('/dashboard');
     }
   })
-  let message=req.session.error;
-  req.session.error=""
+  let message = req.session.error;
+  req.session.error = ""
   res.render('createmeet', {
     isAuth: req.session.isAuth,
     groupid: req.params.group,
@@ -565,7 +565,7 @@ app.get('/cancelmeet/:group/:meet', isAuth, async function(req, res) { //Cancels
     }
   })
 
-  Meet.updateOne({  //Sets status to one
+  Meet.updateOne({ //Sets status to one
     _id: req.params.meet
   }, {
     $set: {
@@ -605,7 +605,7 @@ app.get('/undomeet/:group/:meet', isAuth, async function(req, res) { //Undo canc
     }
   })
 
-  Meet.updateOne({  //Set status to 0
+  Meet.updateOne({ //Set status to 0
     _id: req.params.meet
   }, {
     $set: {
@@ -742,7 +742,7 @@ app.post('/joingroup', isAuth, async function(req, res) {
     }
   });
 
-  let ispart = await User.findOne({  //If user is already part of the group
+  let ispart = await User.findOne({ //If user is already part of the group
     _id: req.session.user,
     groups: group._id
   }, function(err, ispart) {
@@ -752,7 +752,7 @@ app.post('/joingroup', isAuth, async function(req, res) {
     }
   })
 
-  User.findOne({  //Else adds it to his/her groups list
+  User.findOne({ //Else adds it to his/her groups list
     _id: req.session.user,
   }, function(err, foundUser) {
     if (err) {
@@ -765,18 +765,11 @@ app.post('/joingroup', isAuth, async function(req, res) {
   })
 
 })
-app.post('/group', isAuth, async function(req, res) {
+app.post('/group', isAuth, function(req, res) {
   let name = req.body.name;
   let key = req.body.key;
-  if (name == "" || key == "") {
-    req.session.error = ""
-    return res.render('creategroup', {
-      isAuth: req.session.isAuth,
-      message: "Please Input all Data",
-      title: "Create Group | "
-    });
-  }
-  let foundGroup = await Group.findOne({  //Checks if the groupname is already taken or not
+
+  Group.findOne({ //Checks if the groupname is already taken or not
     groupname: name
   }, function(err, foundGroup) {
     if (foundGroup) {
@@ -786,26 +779,37 @@ app.post('/group', isAuth, async function(req, res) {
         message: "Sorry! Group Name already taken!",
         title: "Create Group | "
       });
+    } else {
+      if (name == "" || key == "") {
+        req.session.error = ""
+        return res.render('creategroup', {
+          isAuth: req.session.isAuth,
+          message: "Please Input all Data",
+          title: "Create Group | "
+        });
+      } else {
+        User.findOne({
+          _id: req.session.user
+        }, function(err, foundUser) {
+          if (err) {
+            req.session.error = "User logged out!"
+            res.redirect('/login');
+          } else {
+            const group = new Group({
+              groupname: name,
+              groupkey: key
+            });
+            group.save();
+            foundUser.groups.push(group._id);
+            foundUser.save();
+            res.redirect('/dashboard/' + group._id)
+          }
+        })
+      }
     }
   });
 
-  User.findOne({
-    _id: req.session.user
-  }, function(err, foundUser) {
-    if (err) {
-      req.session.error = "User logged out!"
-      res.redirect('/login');
-    } else {
-      const group = new Group({
-        groupname: name,
-        groupkey: key
-      });
-      group.save();
-      foundUser.groups.push(group._id);
-      foundUser.save();
-      res.redirect('/dashboard/' + group._id)
-    }
-  })
+
 })
 
 app.post('/createmeet/:group', isAuth, async function(req, res) {
@@ -815,8 +819,8 @@ app.post('/createmeet/:group', isAuth, async function(req, res) {
   let start = req.body.start;
   let end = req.body.end;
 
-  if (name == "" || details == "") {  //Checks if nothing is blank
-    res.redirect('meet/' + groupid);
+  if (name == "" || details == "") { //Checks if nothing is blank
+    return res.redirect('/createmeet/' + groupid);
   }
   let members = await User.find({ //Checks if there are any members
     groups: req.params.group
@@ -837,14 +841,14 @@ app.post('/createmeet/:group', isAuth, async function(req, res) {
     }
   })
 
-  User.findOne({  //If the user is part of this group
+  User.findOne({ //If the user is part of this group
     _id: req.session.user,
     groups: groupid
   }).populate('groups').exec(function(err, user) {
     if (!user) {
-      res.redirect('/dashboard' + groupid)
+      return res.redirect('/dashboard' + groupid)
     } else if (err) {
-      res.redirect("/dashboard");
+      return res.redirect("/dashboard");
     }
     const meet = new Meet({
       meetname: name,
@@ -862,7 +866,7 @@ app.post('/createmeet/:group', isAuth, async function(req, res) {
     group.meets.push(meet._id);
     group.save();
 
-    members.forEach(function(member) {  //Sends an invite mail to each user
+    members.forEach(function(member) { //Sends an invite mail to each user
       mail(user, member, meet, "invite")
     })
     req.session.error = "New Meet Created!"
@@ -904,7 +908,7 @@ app.post('/signup', async function(req, res) {
   let username = req.body.username;
   let password = req.body.password;
   let repassword = req.body.repassword;
-  if (email == "" || username == "" || password == "") {  //Input cannot be blank
+  if (email == "" || username == "" || password == "") { //Input cannot be blank
     return res.render('signup', {
       isAuth: req.session.isAuth,
       message: "Please Input Every Data!",
@@ -918,7 +922,7 @@ app.post('/signup', async function(req, res) {
       title: 'Sign Up | '
     })
   }
-  let foundUser = await User.findOne({  //Shouldn't be an existing user
+  let foundUser = await User.findOne({ //Shouldn't be an existing user
     email: email
   });
   if (foundUser) {
