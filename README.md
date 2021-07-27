@@ -35,18 +35,19 @@
 6) <b>Participants List</b> : Any person in the call can see the participants list and check who all are in the call
 7) <b>Name on Hovering</b> : While hovering on a video box one can see the participants name
 8) <b>Chat</b> : Users can chat in the call to communicate when not able to speak
-9) <b>Sound Alerts</b> : This is provided so that the people in the call become aware of the entering of a new person
-10) <b>Video Boxes Resizing</b> : Video boxes can resize themselves to fit people in the screen aesthetically
-11) <b>Sign Up / Log In</b> : If the user hosts regular meets and want to store the chats, list of meets and quickly remind people of the meets then they can log in
-12) <b>Create Groups / Join Groups</b>: User can create many groups, each with a key to keep the group private and secure from unwanted people
-13) <b>Group Details in Group Dashboard</b> : In the dashboard, one can see the details such as key and members so that if one forgets the key, they can find it there and also know who all are a part of the group
-14) <b>Create Meets</b> : User can create meets under a group
-15) <b>Cancel / Undo Cancel</b> : If someone wants to cancel a meet they can do so, and by nodemailer, the members will receive a mail
-16) <b>Chat 2.0</b> : This is different from the previous chat as here you can chat before, during and after the call. People outside the meet can text people inside.
-17) <b>Mails</b> : Server sends mail to the members when a new meet is created, meet is cancelled, and also when the user explicitly wants to remind people about a meet.
-18) <b>Reminders</b> : Server automatically remind users about their meet at the time of their meet
-19) <b>Contact Us</b> : User can contact us and give feedback that will help me to better my project
-20) <b>Help Page</b> : A help page is provided where every question regarding the use of the website is provided
+9) <b>Collab</b> : People can collaborate using a whiteboard and the data on the whiteboard is stored until all users close their whiteboard
+10) <b>Sound Alerts</b> : This is provided so that the people in the call become aware of the entering of a new person
+11) <b>Video Boxes Resizing</b> : Video boxes can resize themselves to fit people in the screen aesthetically
+12) <b>Sign Up / Log In</b> : If the user hosts regular meets and want to store the chats, list of meets and quickly remind people of the meets then they can log in
+13) <b>Create Groups / Join Groups</b>: User can create many groups, each with a key to keep the group private and secure from unwanted people
+14) <b>Group Details in Group Dashboard</b> : In the dashboard, one can see the details such as key and members so that if one forgets the key, they can find it there and also know who all are a part of the group
+15) <b>Create Meets</b> : User can create meets under a group
+16) <b>Cancel / Undo Cancel</b> : If someone wants to cancel a meet they can do so, and by nodemailer, the members will receive a mail
+17) <b>Chat 2.0</b> : This is different from the previous chat as here you can chat before, during and after the call. People outside the meet can text people inside.
+18) <b>Mails</b> : Server sends mail to the members when a new meet is created, meet is cancelled, and also when the user explicitly wants to remind people about a meet.
+19) <b>Reminders</b> : Server automatically remind users about their meet at the time of their meet
+20) <b>Contact Us</b> : User can contact us and give feedback that will help me to better my project
+21) <b>Help Page</b> : A help page is provided where every question regarding the use of the website is provided
 
 ## <a name="technologystack"></a>Technology Stack:
   1) <b>Node.js</b>  - Back End
